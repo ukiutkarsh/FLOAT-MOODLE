@@ -86,8 +86,8 @@ def add_notification(request, course_id):
             notification.course = course
             notification.time = datetime.datetime.now().strftime('%H:%M, %d/%m/%y') # get the current date,time and convert into string
             notification.save()
-            return redirect('instructor:instructor_detail', course.id)
-        return render(request, 'instructor/add_notification.html', {'course': course, 'form': form})
+            return redirect('TA:TA_detail', course.id)
+        return render(request, 'TA/add_notification.html', {'course': course, 'form': form})
     else:
         return render(request,'TA/access_denied.html',{'course':course})
 
