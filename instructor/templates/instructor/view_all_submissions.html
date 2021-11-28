@@ -1,0 +1,82 @@
+{% extends 'instructor/instructor_basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+{% block body %}
+<br>
+
+<div class="container-fluid songs-container">
+
+    <div class="row">
+        <!-- Left Album Info -->
+        <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default">
+
+                <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                    <a href="{% url 'instructor:instructor_detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9"style="color:white;">
+            <div class="col-sm-1">
+                <a href="{% url 'instructor:instructor_detail' course.id %}">
+                    <button type="submit" class="btn btn-success" style="font-size: larger; padding-left: 12px; margin-left:0px; margin-right:0px">Home</button>
+                </a>
+            </div>
+            <div class="col-sm-1" style="width: 35px;"></div>
+            <div class="col-sm-1">
+                <a href="{% url 'instructor:add_assignment' course.id %}">
+                    <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Add Assignments</button>
+                </a>
+            </div>
+            <div class="col-sm-1" style="margin-left: 85px;"></div>
+            <div class="col-sm-1">
+                <a href="{% url 'instructor:view_all_assignments' course.id %}">
+                    <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Assignments</button>
+                </a>
+            </div>
+            <div class="col-sm-1" style="margin-left: 25px;"></div>
+            <div class="col-sm-1">
+                <a href="{% url 'instructor:add_resource' course.id %}">
+                    <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Add a Resource</button>
+                </a>
+            </div>
+            <div class="col-sm-1" style="margin-left: 60px;"></div>
+            <div class="col-sm-1">
+                <a href="{% url 'instructor:add_notification' course.id %}">
+                    <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Notify Students</button>
+                </a>
+            </div> 
+        </div>
+        <br><br><br>
+       <div class="col-sm-7" style="align:center; overflow-y: scroll; height:650px;border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px; margin-left: 30px; width:1000px;">
+        <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Submissions</h3>
+    {% if submissions %}
+    {% for submission in submissions reversed %}
+        <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+            <a href="{{ submission.file_submitted.url }}" style="color: #209dd4; display: inline-block; margin-left: 0px;"> <h3 style="padding-left: 30px; padding-bottom: 0px;"> Download the Submission </h3> </a> 
+            <h3 style="padding-left: 30px; margin-top: 0px;"> Submitted by {{ submission.user }} </h3> 
+            <h4 style="padding-left: 30px;"> Submitted at {{ submission.time_submitted }} </h4>   
+            <div style="margin-left: 400px;display: inline-block;">
+                <a href="{% url 'instructor:give_feedback' submission.id %}">
+                    <button type="submit" class="btn btn-success btn-lg">Give Feedback</button>
+                </a> 
+            </div>
+</div>
+    {% endfor %}
+        </div>
+    {% else%}
+    <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+        No submissions made so far.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

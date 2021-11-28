@@ -1,0 +1,40 @@
+{% extends 'instructor/instructor_basic_page.html' %}
+{% block course_active %} active {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <h2 style="text-align: center; padding-bottom: 10px;"> Recieved Messages </h2>
+            <div class="column" style="position:fixed-right;overflow-y: scroll; height:540px; border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px; width: 550px;">
+                <div class="imessage" style="background-color: #e3f0e8;">
+                {% for message in inbox_messages %}
+                <article class="post" style="border-bottom: 1px solid black;">
+                    <h4 style="text-align: center;">{{message.published_at}}</h4>
+                    <h2 style="padding-left: 10px; padding-bottom: 5px;"><a href="" style="color: black;">{{ message.sender }}</a></h2>
+                    <p class="from-them" style="font-size: 20px;"> {{ message.msg_content|linebreaksbr }} </p> <br>
+                </article>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h2 style="text-align: center; padding-bottom: 10px;">Sent Messages</h2> 
+            <div class="column" style="position:fixed-right;overflow-y: scroll; height:540px; border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px; width: 600px;">
+                <div class="imessage" style="background-color: #e3f0e8;">
+                {% for message in sent_messages %}
+                <article class="post" style="border-bottom: 1px solid black;">
+                    <h4 style="text-align: center;">{{message.published_at}}</h4>
+                    <h2 style="text-align: right; padding-right: 15px"><a href="" style="color: black;">{{ message.receiver }}</a></h2>
+                    <p class="from-me" style="color: white; font-size: 20px;"> {{ message.msg_content|linebreaksbr }} </p> <br> <br>
+                    <div style="margin-left: 260px; margin-top: 20px;"> <a href="{% url 'delete' message.id %}"> <button type="button" class="btn btn-danger">Delete</button> </a> </div> <br>
+                </article>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div> <br>
+    <article style="margin-left: 465px;">
+        <a href="{%url 'send_message' %}"> <button type="button" class="btn btn-primary btn-lg"> Send a Message </button> </a> <br> <br> 
+    </article>
+</div>
+{% endblock %}

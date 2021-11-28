@@ -1,0 +1,73 @@
+{% extends 'course/basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+
+{% block body %}
+<br>
+<div class="container-fluid songs-container" >
+
+    <div class="row">
+
+    <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default">
+
+                <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                    <a href="{% url 'course:detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+
+        <div class="col-sm-7" style="align:center; overflow-y: scroll;border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px;">
+        <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Grades For Assignment {{assignment.name}}</h3>
+        
+        <a href="{% url 'instructor:grading_statistics' assignment.id %}">
+            <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:10px">View Statistics </button>
+        </a>
+        <br><br>
+
+        <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Obtained Grade</th>
+                <th>Range</th>
+                <th>Feedback</th>
+        
+            </tr>
+        </thead>
+
+        <tbody>
+        {% if students %}
+        {% for student in students reversed %}
+            <tr>
+                <td>{{student.name}}</td>
+                <td>{{marks|get:student.id}}</td>
+                <td>0-100</td>
+                <td>{{contents|get:student.id}}</td>
+            </tr>
+        {% endfor %}    
+    
+        {% else%}
+        <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+            No submissions made so far.
+        </div>
+        {% endif %}
+        
+        </tbody>
+        </table>
+       
+    
+  </div><br><br><br>
+</div>
+</div><br><br><br>
+{% endblock %}

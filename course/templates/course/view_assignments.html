@@ -1,0 +1,104 @@
+{% extends 'course/basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+
+{% block body %}
+<br>
+<div class="container-fluid songs-container" >
+
+    <div class="row">
+
+    <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default" style="margin-left: 30px;">
+                <div class="panel-body" style="background-color: #e3f0e8; border: 3px solid #66cdaa; ">
+                    <a href="{% url 'course:detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-7" style="margin-left: 70px; overflow-y: scroll; height:650px;border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px;">
+        <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Assignments</h3>
+    {% if assignments %}
+        {% for assignment in assignments reversed %}
+    <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+        <h2 style="padding-left: 20px; padding-bottom: 5px; display: inline-block;"> {{assignment.name}} </h2>
+        <div style="float: right; padding-top: 10px;">
+            {% if assignment in progress.assignments.all %}
+        <a href="{% url 'course:mark_as_done' course.id 0 assignment.id 1 %}">
+            <button type="submit" class="btn btn-success">Done</button></a>
+        {% else %}
+        <a href="{% url 'course:mark_as_done' course.id 0 assignment.id 0 %}">
+            <button type="submit" class="btn btn-success">Mark as Done</button>
+        </a>
+        {% endif %}
+        </div> 
+        <div class="row">
+            <div class="col-sm-4">
+                <h5 style="padding-left: 20px; padding-bottom: 0px;"> Last Updated at  </h5>
+            </div>
+            <div class="col-sm-8" style="padding-top: 0px;">
+                <h5 style="display: inline-block; padding-right: 10px;"> : </h5> <h5 style="display: inline-block;"> {{ assignment.post_time }} </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <h5 style="padding-left: 20px;"> Deadline </h5>
+            </div> 
+            <div class="col-sm-8" style="padding-top: 0px;">
+                <h5 style="display: inline-block; padding-right: 10px;"> : </h5> <h5 style="display: inline-block;"> {{ assignment.deadline }} </h5>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-sm-4">
+                <h5 style="padding-left: 20px;"> Assignment description </h5>
+            </div> 
+            <div class="col-sm-8" style="padding-top: 0px;">
+                <h5 style="display: inline-block; padding-right: 10px;"> : </h5> <h5 style="display: inline-block;"> {{ assignment.description }} </h5>
+            </div>
+        </div> 
+        {% if assignment.closed %}
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 style="padding-left: 19px; padding-top: -50px;"> Submission Status </h3>
+            </div> 
+            <div class="col-sm-8" style="padding-top: -50px;">
+                <h3 style="display: inline-block; padding-right: 10px;"> : </h3> <h3 style="color: red; display: inline-block;"> Assignment over-due </h3>
+            </div>
+        </div> <br>
+        <a href="{% url 'course:view_submissions' assignment.id %}" style="padding-left: 270px;">
+            <button type="submit" class="btn btn-info">View my submissions</button>
+        </a>
+        {% else %}
+        <br>
+        <a href="{{ assignment.file.url }}" style="padding-left: 75px;">
+            <button type="submit" class="btn btn-info"> Download Assignment</button>
+        </a>
+        <a href="{% url 'course:upload_submission' assignment.id %}" style="padding-left: 75px;">
+            <button type="submit" class="btn btn-info">Upload Submission</button>
+        </a>
+        <a href="{% url 'course:view_submissions' assignment.id %}" style="padding-left: 75px;">
+            <button type="submit" class="btn btn-info">View my submissions</button>
+        </a>
+        {% endif %}
+        <br><br>      
+</div>
+    {% endfor %}
+    {% else%}
+    <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+        No Assignments made so far.
+    </div>
+    {% endif %}
+        </div><br><br><br>
+</div>
+</div><br><br><br>
+{% endblock %}

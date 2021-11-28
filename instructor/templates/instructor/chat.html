@@ -1,0 +1,21 @@
+{% extends 'instructor/instructor_basic_page.html' %}
+{% block course_active %}active{% endblock %}
+{% block body %}
+    <h1 style="text-align: center;"> Send Message </h1> <br>
+    <div class="container" style="padding-left: 120px;">
+        <div class="column" style="position:fixed-right;overflow-y: scroll; height:450px; border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px; width: 900px;"> <br> 
+            <form method="POST" class="post-form" >{% csrf_token %}
+                <h3 style="display: inline-block; padding-right: 37px; padding-left: 103px;"> Receiver Name : </h3> {{ form.receiver }} <br> <br>
+                <div class="row">
+                    <div class="column3" style="padding-left: 97px;">
+                        <h3> Message Content : </h3> 
+                    </div>
+                    <div class="column2">
+                        {{ form.msg_content }}
+                    </div>
+                </div> <br> 
+                <div style="text-align: center;"> <button type="submit" class="save btn btn-primary btn-lg"> Send Message </button> </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

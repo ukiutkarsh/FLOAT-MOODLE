@@ -1,0 +1,101 @@
+{% extends 'course/basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+
+{% block body %}
+<br>
+<div class="container-fluid songs-container" >
+
+    <div class="row">
+
+    <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default">
+
+                <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                    <a href="{% url 'course:detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-7" style="align:center; overflow-y: scroll;border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px;">
+        <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Grades</h3>
+        
+        <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Assignments</th>
+                <th>Calculated weight</th>
+                <th>Obtained Grade</th>
+                <th>Range</th>
+                <th>Weighted Percentage</th>
+                <th>Feedback</th>
+        
+            </tr>
+        </thead>
+
+        <tbody>
+    
+        {% if assignments %}  
+        {% for assignment in assignments reversed %}
+            <tr>
+                <td>{{assignment.name}}</td>
+                <td>{{assignment.weightage}}%</td>
+                {% if marks_list|get_marks:assignment.id %}
+                <td>{{marks_list|get_marks:assignment.id}} </td>
+                <td>0-100</td>
+                <td>{{total_list|get_total:assignment.id}}%</td>
+                <td>{{contents|get:assignment.id}}</td>
+                {% else %}
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                {%endif%}
+            </tr>
+        {% endfor %}
+    
+        
+        <td>Course Total:</td>
+        <td> </td>
+        <td>{{course_total}}</td>
+        <td> </td>
+        <td>{{total_marks}}%</td><br>
+        <td></td>
+
+        </tbody>
+        </table>
+
+
+        <h2>Class Average : {{average}}</h2>
+        {% if lagging_behind %}
+        <h2>Oops! </h2>
+        <h2> You are falling behind class average</h2>
+        <h2> you need to cover up</h2>
+        {% else %}
+        <h4>Congrats!</h4>
+        <h4>You are doing good</h4>
+        {%endif%}
+    {% else%}
+    <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+        No Assignments made so far.
+    </div>
+    {% endif %}
+        
+    
+  </table>
+       
+    
+  </div><br><br><br>
+</div>
+</div><br><br><br>
+{% endblock %}

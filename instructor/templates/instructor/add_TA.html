@@ -1,0 +1,85 @@
+{% extends 'instructor/instructor_basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+{% block body %}
+<br>
+<div class="container-fluid">
+
+
+    <div class="row">
+
+        <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                    <a href="{% url 'instructor:instructor_detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9"style="color:white;">
+            <div class="col-sm-1">
+                <a href="{% url 'instructor:instructor_detail' course.id %}">
+                    <button type="submit" class="btn btn-success" style="font-size: larger; padding-left: 12px; margin-left:0px; margin-right:0px">Home</button>
+                </a>
+            </div>
+            <div class="col-sm-1" style="margin-right: 20px;"></div>
+        <div class="col-sm-2">
+            <a href="{% url 'instructor:view_all_assignments' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Submissions</button>
+            </a>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+            <a href="{% url 'instructor:add_resource' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Add a resource</button>
+            </a>
+        </div>
+        <div class="col-sm-1" style="margin-right: 30px;"></div>
+        <div class="col-sm-2">
+            <a href="{% url 'instructor:add_notification' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Notify Students</button>
+            </a>
+        </div>
+        </div>
+        <br><br><br>
+        <div class="col-sm-6">
+                <div class="panel-body"style="background-color:#e3f0e8;color:black;border: 3px solid #66cdaa;font-family: 'Abhaya Libre';font-size:16px; margin-left: 70px; width: 800px">
+                    <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Invite TAs through mail</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <span class="text-danger small">{{ field.errors }}</span>
+                        </div>
+                        <label class="control-label col-sm-5"> <h3> {{ field.label_tag }} </h3></label>
+                        <div class="col-sm-5" style="padding-top: 29px;">{{ field }}</div>
+                    </div>
+        {% endfor %}
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-10" style="margin-left: 330px">
+                <button type="submit" class="btn btn-success btn-lg">Submit</button>
+            </div>
+        </div>
+    </form>
+                </div>
+            </div>
+
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}

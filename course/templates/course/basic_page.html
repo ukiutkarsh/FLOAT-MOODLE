@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Float Moodle{% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Alfa Slab One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Ledger' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet'>
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel='stylesheet'>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        a{
+            color: yellow;
+        }
+        #id_content
+        {
+            width: 600px;
+            height: 40px;
+        }
+
+        body
+        {
+            background: url('https://i.pinimg.com/originals/5d/5d/79/5d5d79ab40f17440b11dfdf9cd0f1f08.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Ledger;font-size: 20px;
+        }
+        .column {
+            float: left;
+            width: 50%;
+        }
+        .column2 {
+            float: left;
+            width: 66%;
+        }
+        .column3 {
+            float: left;
+            width: 34%;
+        }
+        table, th, td {
+            border: 1px solid white;
+            border-collapse: collapse;
+        }
+        th, td {
+            font-weight: 900;
+            background-color: #96D4D4;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }  
+        .imessage {
+            background-color: #fff;
+            border: 1px solid #e5e5ea;
+            border-radius: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            font-family: "SanFrancisco";
+            font-size: 1.25rem;
+            margin: 0 auto 1rem;
+            max-width: 600px;
+            padding: 0.5rem 1.5rem;
+        }
+        .imessage p {
+            border-radius: 1.15rem;
+            line-height: 1.25;
+            max-width: 75%;
+            padding: 0.5rem .875rem;
+            position: relative;
+            word-wrap: break-word;
+        }
+        .imessage p::before,
+        .imessage p::after {
+            bottom: -0.1rem;
+            content: "";
+            height: 1rem;
+            position: absolute;
+        }
+        p.from-me {
+            align-self: flex-end;
+            background-color: #248bf5;
+            float: right;
+        }
+        p.from-me::before {
+            border-bottom-left-radius: 0.8rem 0.7rem;
+            border-right: 1rem solid #248bf5;
+            right: -0.35rem;
+            transform: translate(0, -0.1rem);
+        }
+        p.from-me::after {
+            background-color: #e3f0e8;
+            border-bottom-left-radius: 0.5rem;
+            right: -40px;
+            transform:translate(-30px, -2px);
+            width: 10px;
+        }
+        p[class^="from-"] {
+            margin: 0.5rem 0;
+            width: fit-content;
+        }
+        p.from-me ~ p.from-me {
+            margin: 0.25rem 0 0;
+        }
+        p.from-me ~ p.from-me:not(:last-child) {
+            margin: 0.25rem 0 0;
+        }   
+        p.from-me ~ p.from-me:last-child {
+            margin-bottom: 0.5rem;
+        }
+        p.from-them {
+            align-items: flex-start;
+            background-color: white;
+            color: #000;
+        }
+        p.from-them:before {
+            border-bottom-right-radius: 0.8rem 0.7rem;
+            border-left: 1rem solid white;
+            left: -0.35rem;
+            transform: translate(0, -0.1rem);
+        }
+        p.from-them::after {
+            background-color: #e3f0e8;
+            border-bottom-right-radius: 0.5rem;
+            left: 20px;
+            transform: translate(-30px, -2px);
+            width: 10px;
+        }
+        .margin-b_none {
+            margin-bottom: 0 !important;
+        }
+        .margin-b_one {
+            margin-bottom: 1rem !important;
+        }
+        .margin-t_one {
+            margin-top: 1rem !important;
+        }    
+        #id_receiver {
+            width: 520px;
+            height: 30px;
+        }  
+        #id_msg_content{
+            width: 520px
+        }
+        #id_content{
+            width: 560px
+        }
+    </style>
+</head>
+<body background=""style="font-family: Ledger;font-size: 20px;">
+<nav class="navbar-fixed-top bg-primary">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" style="font-family:'Lobster',cursive;font-size:30px;" href="{% url 'course:index' %}">Float Moodle</a>
+                <a class="navbar-brand" style="font-family:'Lobster';font-size:30px;" href="{% url 'dashboard' %}">View Profile</a>
+        </div>
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="http://127.0.0.1:8000/view_messages">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp; Inbox
+                    </a>
+                </li>
+                <li>
+                    <a href="http://127.0.0.1:8000/password_reset">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp; Reset Password
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_user' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav><br><br>
+{% block body %}
+{% endblock %}
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,51 @@
+{% extends 'instructor/instructor_basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+{% block body %}
+<br>
+<div class="container-fluid">
+
+
+    <div class="row">
+
+        <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default">
+
+                <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                    <a href="{% url 'instructor:instructor_detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <br><br><br>
+        <div class="col-sm-6">
+
+            <div class="panel-body"style="background-color:#e3f0e8;color:black;border: 3px solid #66cdaa;font-family: 'Abhaya Libre';font-size:16px;">
+
+            <h3 align="Left"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Grading Statistics for Assignment {{assignment.name}}</h3> 
+            <h3 align="Left"; style="font-family:Volkhov,cursive;font-size:30px;color: #728892">Average Marks - {{average}}</h3> 
+            <h3 align="Left"; style="font-family:Volkhov,cursive;font-size:30px;color: #728892">Variance - {{variance}}</h3>
+                
+<div class="col-sm-2">
+    <h2>Histogram</h2>
+    <a href="{{i.image.url}}">
+        {{data|safe}}
+    </a>
+</div>
+                </div>
+
+
+
+    </div>
+
+</div>
+
+{% endblock %}

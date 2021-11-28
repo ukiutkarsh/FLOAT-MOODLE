@@ -1,0 +1,63 @@
+{% extends 'course/basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+
+{% block body %}
+<br>
+<div class="container-fluid songs-container">
+
+    <div class="row">
+
+    <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default">
+
+                <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                    <a href="{% url 'course:detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-7" style="position:fixed-righ; overflow-y: scroll; height:650px;border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px;">
+        <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Resources</h3>
+
+        {% if resources %}
+    {% for resource in resources reversed %}
+            <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+        {{ resource.title }} -
+                <div style="position:right">
+        <a href="{{ resource.file_resource.url }}" style="text-align:right">
+            <button type="submit" class="btn btn-success">Download</button>
+        </a>
+        {% if resource in progress.resources.all %}
+        <a href="{% url 'course:mark_as_done' course.id 1 resource.id 1 %}">
+            <button type="submit" class="btn btn-success">Done</button></a>
+        {% else %}
+        <a href="{% url 'course:mark_as_done' course.id 1 resource.id 0 %}">
+            <button type="submit" class="btn btn-success">Mark as Done</button></a>
+        {% endif %}
+            <br>
+                    </div>
+
+            </div>
+    {% endfor %}
+    
+    {% else%}
+    <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+        No Resources given so far.
+    </div>
+    {% endif %}
+
+        </div>
+</div>
+</div>
+{% endblock %}

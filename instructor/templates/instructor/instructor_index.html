@@ -1,0 +1,50 @@
+{% extends 'instructor/instructor_basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+
+{% block body %}
+
+<div class="albums-container container-fluid"style="font-family: Ledger;font-size: 22px;">
+    <!-- Courses -->
+    <div class="row" >
+        <div class="col-sm-8"style="font-family: 'Alfa Slab One';font-size:24px;">
+            <h3 align="center" style="font-family:Volkhov,cursive;font-size:40px;color: #728892; margin-left: 530px; margin-bottom: 20px;">YOUR COURSES</h3>
+        </div > <br>
+        <div class="col-sm-8" style="margin-left: 567px; margin-bottom: 20px;"> Create new courses over <a href="http://127.0.0.1:8000/create_course" style="color: blue;"> here </a> </div>
+        {% if courses %}
+            {% for course in courses %}
+                <div class="col-sm-3" style="margin-left: 85px;">
+                    <div class="thumbnail" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                        <a href="{% url 'instructor:instructor_detail' course.id %}">
+                             <img src="{{ course.course_logo.url }}" class="img-responsive">
+                            <!--{{ course.name }}-->
+                        </a>
+                        <div class="caption">
+                            <h2>{{ course.code }}</h2>
+                            <div style="height: 40px">
+                                <h4>{{ course.name }}</h4>
+                            </div>
+                            <!-- View Details -->
+                            <a href="{% url 'instructor:instructor_detail' course.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <h4>You have not created any courses</h4>
+            </div>
+        {% endif %}
+    </div>
+    </div>
+<br>
+{% endblock %}
+
+
+
+<!--
+             <a href="{% url 'instructor:instructor_detail' course.id %}">
+                             <img src="{{ course.course_logo.url }}" class="img-responsive">
+-->

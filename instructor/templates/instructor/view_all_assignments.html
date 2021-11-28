@@ -1,0 +1,108 @@
+{% extends 'instructor/instructor_basic_page.html' %}
+{% block course_active %}active{% endblock %}
+
+{% block body %}
+<br>
+<div class="container-fluid songs-container">
+
+    <div class="row">
+        <!-- Left Album Info -->
+        <div class="col-sm-6 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
+                    <a href="{% url 'instructor:instructor_detail' course.id %}">
+                        {% if course.course_logo %}
+                            <img src="{{ course.course_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1 align="center">{{ course.code }}<br> <small>{{ course.name }}</small></h1>
+                    <h2 align="center">{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9"style="color:white;">
+            <div class="col-sm-2">
+                <a href="{% url 'instructor:instructor_detail' course.id %}">
+                    <button type="submit" class="btn btn-success" style="font-size: larger; padding-left: 12px; margin-left:0px; margin-right:0px">Home</button>
+                </a>
+            </div>
+        <div class="col-sm-2">
+            <a href="{% url 'instructor:add_assignment' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Add Assignments</button>
+            </a>
+        </div>
+        <div class="col-sm-1" style="margin-left: 50px;"></div>
+        <div class="col-sm-2">
+            <a href="{% url 'instructor:add_resource' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Add a Resource</button>
+            </a>
+        </div>
+        <div class="col-sm-1" style="margin-left: 20px;"></div>
+        <div class="col-sm-2">
+            <a href="{% url 'instructor:add_notification' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:0px">Notify Students</button>
+            </a>
+        </div> 
+        </div>
+        <br> <br> <br>
+        <div class="col-sm-7" style="align:center; overflow-y: scroll; height:650px;border: 3px solid #66cdaa;background-color:#e3f0e8;color:black;font-family: 'Abhaya Libre';font-size:16px; margin-left: 70px; width: 900px;">
+        <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Assignments</h3>
+
+        <a href="{% url 'instructor:all_assignment_stats' course.id %}">
+            <button type="submit" class="btn btn-success">View All Statistics</button>
+        </a>
+    {% if assignments %}
+        {% for assignment in assignments reversed %}
+            <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+                <h2 style="padding-bottom: 0px; display: inline-block; padding-left: 20px;"> {{ assignment.name }} </h2><br>
+            <h2 style="padding-bottom: 0px; display: inline-block; padding-left: 20px;"> {{ assignment.description }} </h2>
+            <div style="float: right; padding-top: 20px;">
+            {% if assignment in progress.assignments.all %}
+                <a href="{% url 'instructor:mark_as_done' course.id assignment.id 1 %}">
+                    <button type="submit" class="btn btn-success">Done</button>
+                </a>
+            {% else %}
+                <a href="{% url 'instructor:mark_as_done' course.id assignment.id 0 %}">
+                    <button type="submit" class="btn btn-success">Mark as Done</button>
+                </a>
+            {% endif %}
+            </div>
+            <div> <h3 style="display: inline-block; padding-right: 30px; padding-left: 20px;">Deadline : </h3> <h3 style="display: inline-block;">{{ assignment.deadline }} </h3></div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-1">
+                    <a href="{% url 'instructor:view_all_submissions' assignment.id %}">
+                        <button type="submit" class="btn btn-info btn-lg">Submissions</button>
+                    </a>
+                </div>
+                <div class="col-sm-2"></div>
+                <din class="col-sm-1">
+                    <a href="{% url 'instructor:add_grades' assignment.id %}">
+                        <button type="submit" class="btn btn-info btn-lg">Add Grades</button>
+                    </a>
+                </din>
+
+                <div class="col-sm-2"></div>
+                <din class="col-sm-1">
+                <a href="{% url 'instructor:view_grades' assignment.id %}">
+                <button type="submit" class="btn btn-info btn-lg">View Grades</button>
+                </a>
+                </din>
+            </div>
+    <br>
+            </div>
+    {% endfor %}
+    {% else %}
+    <div style="background-color:#CDD8CD; border-radius:2%;padding:10px; margin:5px">
+        No Assignments made so far.
+    </div>
+    {% endif %}
+            
+        </div>
+
+</div>
+{% endblock %}
+

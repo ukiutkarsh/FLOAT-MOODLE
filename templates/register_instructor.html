@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Log In{% endblock %}</title>
+    {% load static %}
+    <!--<link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}"/>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Frijole' rel='stylesheet'>
+    <!--<script src="{% static 'music/js/main.js' %}"></script>-->
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+  background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #000000, #000000);
+  background: -moz-linear-gradient(right, #000000, #000000);
+  background: -o-linear-gradient(right, #000000, #000000);
+  background: linear-gradient(to left, #000000, #000000);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+
+
+<script>
+$('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+</script>
+
+</head>
+{% block body %}
+
+<h1 style="font-size: 100px;font-family:Brush Script MT; color: white;text-align: center">
+    Float Moodle by team BruteForces
+</h1>
+
+<!--<div class="login-page">-->
+  <!--<div class="form">-->
+    <!--<form class="register-form">-->
+      <!--<input type="text" placeholder="name"/>-->
+      <!--<input type="password" placeholder="password"/>-->
+      <!--<input type="text" placeholder="email address"/>-->
+      <!--<button>create</button>-->
+      <!--<p class="message">Already registered? <a href="#">Sign In</a></p>-->
+    <!--</form>-->
+    <!--<form class="login-form" role="form" action="{% url 'login_user'%}" method="post" enctype="multipart/form-data">-->
+        <!--{% csrf_token %}-->
+      <!--<input id="id_username" maxlength="30" name="username" type="text" placeholder="username"/>-->
+      <!--<input id="id_password" maxlength="30" name="password" type="password" placeholder="password"/>-->
+      <!--<button>login</button>-->
+      <!--<p class="message">Not registered? <a href="{% url 'register_user' %}">Register Now!</a></p>-->
+    <!--</form>-->
+  <!--</div>-->
+<!--</div>-->
+<!-- 
+<div class="container">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Home</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        {% if user.is_authenticated %}
+        <ul class="nav navbar-nav">
+            
+            <li><a class="navbar-brand" href='/profile'>Profile</a></li>
+            <li><a class="navbar-brand" href='/profile/edit'>Edit Profile</a></li>
+            <li><a class="navbar-brand" href='/profile/change-password'>Change Password</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <a class="navbar-brand" href='/logout'>Log out</a>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href='/password_reset'>Reset Password</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="navbar-brand" href='/login'>Login</a></li>
+          <li><a class="navbar-brand" href='/register'>Register</a></li>
+        </ul>
+        {% endif %}
+      </div>/.nav-collapse
+    </div>/.container-fluid 
+  </nav>
+</div>
+-->
+<br><br><br><br><br><br>
+<div class="col-sm-offset-3 col-sm-8 col-md-5" style="background-color:white">
+{% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h2 style="text-align:center">Register Now</h2><br>
+        {% for field in user_form %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <span class="text-danger small">{{ field.errors }}</span>
+            </div>
+        <label class="control-label col-sm-4">{{ field.label_tag }}</label>
+        <div class="col-sm-5">{{ field }}</div>
+        </div>
+        {% endfor %}
+
+        {% for field in instructor_form %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <span class="text-danger small">{{ field.errors }}</span>
+            </div>
+        <label class="control-label col-sm-4">{{ field.label_tag }}</label>
+        <div class="col-sm-5">{{ field }}</div>
+        </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-10">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+        <center> <p class="message">Already registered? <a href="{% url 'login_user' %}"> Login! </a></p> </center>
+
+    </form>
+</div>
+{% endblock %}
