@@ -20,6 +20,7 @@ from django.utils.encoding import force_bytes
 from TA.models import TeachingAssistant
 from instructor.functions import send_email,email_from
 import threading
+from instructor.views import base_url
 
 ## @brief view for the login page of the website.
 #
@@ -167,7 +168,7 @@ def password_reset_request(request):
                 email_template_name = "password_reset_email.txt"
                 c = {
                 "email":user.email,
-                'domain':'127.0.0.1:8000',
+                'domain': base_url,
                 'site_name': 'Website',
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "user": user,

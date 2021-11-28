@@ -8,7 +8,7 @@ from . import views
 urlpatterns = [
     url(r'^TA_index/$', views.TA_index, name='TA_index'),
     url(r'^(?P<course_id>[0-9]+)/TA_detail/$', views.TA_detail, name='TA_detail'),
-    url(r'^(?P<course_id>[0-9]+)/add_assignment/$', views.add_assignment, name='TA_add_assignment'),
+    url(r'^(?P<course_id>[0-9]+)/TA_add_assignment/$', views.add_assignment, name='TA_add_assignment'),
     url(r'^(?P<course_id>[0-9]+)/TA_add_resource/$', views.TA_add_resource, name='TA_add_resource'),
     url(r'^(?P<course_id>[0-9]+)/add_notification/$', views.add_notification, name='TA_add_notification'),
     # url(r'^(?P<course_id>[0-9]+)/view_all_assignments/$', views.view_all_assignments, name='view_all_assignments'),
