@@ -467,10 +467,8 @@ def all_assignment_stats(request, course_id):
     x_list = []
     mean_list=[]
     variance_list=[]
-    x_list = []
     try:
         for a in assignments:
-            x_list.append(a.name)
             marks_list=[]
             for s in students:
                 try:

@@ -159,8 +159,8 @@ def upload_submission(request, assignment_id):
 
         # link = 
         # email
-        message = "You have submitted your assignment for " + assignment.name + "of the course" + course.code
-        subject = 'Assignment submitted' + assignment.name
+        message = "You have submitted your assignment for " + assignment.name + " of the course " + course.code
+        subject = 'Assignment submitted ' + assignment.name
         recipient_list = [request.user.email]
         thread = threading.Thread(target=send_email,args=(subject, message,email_from, recipient_list, None,))
         thread.start()
