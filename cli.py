@@ -1,6 +1,7 @@
 from getpass import getpass
 from colorama import init
 import requests
+from instructor.views import base_url
 
 init()
 isInstructor = input("Type 'yes' if you are an instructor : ")
@@ -17,7 +18,7 @@ while True:
     # command to view courses
     cmd = input('Float_Moodle $ ')
     if (cmd =='courses'):
-        response = requests.post('http://127.0.0.1:8000/cli/courses/', data = {'username':username, 'roll_num':roll_num, 'password':password})
+        response = requests.post(base_url+'/cli/courses/', data = {'username':username, 'roll_num':roll_num, 'password':password})
         try:
             course_list = response.json()['courses']
             instructor_list = response.json()['instructors']
@@ -29,7 +30,7 @@ while True:
     # Command to view pending assignments and resources
     elif (cmd =='pending'):
         try:
-            response = requests.post('http://127.0.0.1:8000/cli/pending/', data = {'username':username,'roll_num':roll_num, 'password':password})
+            response = requests.post(base_url+'/cli/pending/', data = {'username':username,'roll_num':roll_num, 'password':password})
             print(response.json())
             course_list = response.json()['courses']
             pending_assignments_list = response.json()['pending_assignments_list']
@@ -44,7 +45,7 @@ while True:
             print("Error- ", e)
     
     elif (cmd =='students_enrolled'):
-        response = requests.post('http://127.0.0.1:8000/cli/student_list/', data = {'username':username,'name':name,'password':password})
+        response = requests.post(base_url+'/cli/student_list/', data = {'username':username,'name':name,'password':password})
         try:
             course_list = response.json()['courses']
             student_list = response.json()['student_list']

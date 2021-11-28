@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.template.defaulttags import register
 from TA.models import TeachingAssistant
 from instructor.functions import send_email
+from instructor.views import base_url
 
 email_from = "shah.adish13@gmail.com"
 #register custom filter for looking up from dictionary
@@ -37,6 +38,7 @@ def index(request):
                     a.closed = True
                     a.save()
                     newnotif = Notification()
+                    newnotif.link =  base_url + "/course/"+c.id+"/view_assignments/"
                     newnotif.course=c
                     newnotif.time= a.deadline
                     newnotif.content = str(a.name) + " Assignment over-due"
