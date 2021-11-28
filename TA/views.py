@@ -84,7 +84,7 @@ def add_notification(request, course_id):
         if form.is_valid():
             notification = form.save(commit=False)
             notification.course = course
-            notification.time = datetime.datetime.now().strftime('%H:%M, %d/%m/%y') # get the current date,time and convert into string
+            notification.time = timezone.now().strftime('%H:%M, %d/%m/%y') # get the current date,time and convert into string
             notification.save()
             return redirect('TA:TA_detail', course.id)
         return render(request, 'TA/add_notification.html', {'course': course, 'form': form})

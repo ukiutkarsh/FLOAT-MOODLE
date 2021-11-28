@@ -24,32 +24,45 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-sm-9"style="color:white;">
+            <div class="col-sm-2">
+                <a href="{% url 'TA:TA_detail' course.id %}">
+                    <button type="submit" class="btn btn-success" style="font-size: larger; padding-left: 12px; margin-left:0px; margin-right:0px">Home</button>
+                </a>
+            </div>
+        <div class="col-sm-2">
+            <a href="{% url 'TA:TA_add_assignment' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:-60px">Add Assignments</button>
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <a href="{% url 'TA:TA_add_notification' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:35px">Notify Students</button>
+            </a>
+        </div> 
+        </div>
         <br><br><br>
         <div class="col-sm-6">
-
-
-                <div class="panel-body"style="background-color:#e3f0e8;color:black;border: 3px solid #66cdaa;font-family: 'Abhaya Libre';font-size:16px;">
-                    <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892">Send Email Invitation</h3>
+                <div class="panel-body"style="background-color:#e3f0e8;color:black;border: 3px solid #66cdaa;font-family: 'Abhaya Libre';font-size:16px; width: 900px; margin-left: 60px">
+                    <h3 align="center"; style="text-align:center;font-family:Volkhov,cursive;font-size:40px;color: #728892; margin-bottom: 20px;">Send Email Invitation</h3>
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
-               <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {% for field in form %}
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <span class="text-danger small">{{ field.errors }}</span>
-            </div>
-        <label class="control-label col-sm-5">{{ field.label_tag }}</label>
-        <div class="col-sm-5">{{ field }}</div>
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <span class="text-danger small">{{ field.errors }}</span>
+                            </div>
+                            <label class="control-label col-sm-2" style="margin-left: 20px;">{{ field.label_tag }}</label>
+                            <div class="col-sm-5">{{ field }}</div>
         </div>
         {% endfor %}
 
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-10">
-                <button type="submit" class="btn btn-success">Submit</button>
+            <div class="col-sm-offset-4 col-sm-10" style="margin-left: 370px;">
+                <button type="submit" class="btn btn-success btn-lg">Submit</button>
             </div>
         </div>
     </form>
