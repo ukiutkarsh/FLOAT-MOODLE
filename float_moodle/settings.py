@@ -36,6 +36,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','bruteforces-moodle.herokuapp.com']
 
+import django
+django.setup()
 
 # Application definition
 AUTHENTICATION_BACKENDS = [
