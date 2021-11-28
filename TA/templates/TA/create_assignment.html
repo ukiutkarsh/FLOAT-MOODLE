@@ -12,7 +12,7 @@
             <div class="panel panel-default">
 
                 <div class="panel-body" style="background-color: #e3f0e8;border: 0px solid #66cdaa;">
-                    <a href="{% url 'instructor:instructor_detail' course.id %}">
+                    <a href="{% url 'TA:TA_detail' course.id %}">
                         {% if course.course_logo %}
                             <img src="{{ course.course_logo.url }}" class="img-responsive">
                         {% else %}
@@ -26,25 +26,20 @@
         </div>
         <div class="col-sm-9"style="color:white;">
             <div class="col-sm-2">
-                <a href="{% url 'instructor:instructor_detail' course.id %}">
+                <a href="{% url 'TA:TA_detail' course.id %}">
                     <button type="submit" class="btn btn-success" style="font-size: larger; padding-left: 12px; margin-left:0px; margin-right:0px">Home</button>
                 </a>
             </div>
         <div class="col-sm-2">
-            <a href="{% url 'instructor:view_all_assignments' course.id %}">
-                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:-60px">Submissions</button>
+            <a href="{% url 'TA:TA_add_assignment' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:-60px">Add Assignments</button>
             </a>
         </div>
         <div class="col-sm-2">
-            <a href="{% url 'instructor:add_resource' course.id %}">
-                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:-45px">Add a resource</button>
+            <a href="{% url 'TA:TA_add_notification' course.id %}">
+                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:35px">Notify Students</button>
             </a>
-        </div>
-        <div class="col-sm-2">
-            <a href="{% url 'instructor:add_notification' course.id %}">
-                <button type="submit" class="btn btn-success"style="font-size: larger; margin-left:5px">Notify Students</button>
-            </a>
-        </div>
+        </div> 
         </div>
         <br><br><br>
         <div class="col-sm-6">
