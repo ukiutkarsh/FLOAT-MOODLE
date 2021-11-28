@@ -38,7 +38,7 @@ def index(request):
                     a.closed = True
                     a.save()
                     newnotif = Notification()
-                    newnotif.link =  base_url + "/course/"+c.id+"/view_assignments/"
+                    newnotif.link =  base_url + "/course/"+str(c.id)+"/view_assignments/"
                     newnotif.course=c
                     newnotif.time= a.deadline
                     newnotif.content = str(a.name) + " Assignment over-due"
