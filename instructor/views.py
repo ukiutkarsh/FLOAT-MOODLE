@@ -1,5 +1,6 @@
 ## @brief Views for the instructor app.
 from django.contrib.auth.decorators import login_required
+from django.core.files import base
 
 from TA.models import TeachingAssistant,TA_ship
 from .models import Feedback, ImageObject, Instructor, Submission, Assignment
@@ -26,6 +27,7 @@ from io import StringIO, BytesIO
 # This view is called by /instructor_index url.\n
 # It returns the instructor's homepage containing links to all the courses he teaches.
 email_from = 'shah.adish13@gmail.com'
+base_url = "https://bruteforces-moodle.herokuapp.com"
 
 @login_required
 def instructor_index(request):
@@ -125,7 +127,7 @@ def add_assignment(request, course_id):
         course.total +=1
         course.save()
         notification = Notification()
-        notification.link = "http://127.0.0.1:8000/course/"+course_id+"/view_assignments/"
+        notification.link = base_url + "/course/"+course_id+"/view_assignments/"
         notification.content = "New Assignment Uploaded |" + " Due at "+ str(assignment.deadline)[:-9]
         notification.course = course
         notification.time = timezone.now()
@@ -161,7 +163,7 @@ def add_resource(request, course_id):
         course.total +=1
         course.save()
         notification = Notification()
-        notification.link = "http://127.0.0.1:8000/course/"+course_id+"/view_resources/"
+        notification.link = base_url + "/course/"+course_id+"/view_resources/"
         notification.content = "New Resource Added - " + resource.title
         notification.course = course
         notification.time = timezone.now()
@@ -319,7 +321,7 @@ def add_grades(request, assignment_id):
                 feedback.save()
             
             notification = Notification()
-            notification.link = "http://127.0.0.1:8000/course/"+course.id+"/view_feedback/"
+            notification.link = base_url + "/course/"+course.id+"/view_feedback/"
             notification.content = "Feedback added - " + str(assignment.name)
             notification.course = course
             notification.time = timezone.now()
